@@ -2,7 +2,7 @@
 
 This repo is the pytorch implementation of the paper from Google: [MixConv: Mixed Depthwise Convolutional Kernels](https://arxiv.org/pdf/1907.09595.pdf)
 
-This code mimics the implementation from offical repo in Tensorflow (https://github.com/tensorflow/tpu/tree/master/models/official/mnasnet/mixnet)
+This code mimics the implementation from the offical repo in Tensorflow (https://github.com/tensorflow/tpu/tree/master/models/official/mnasnet/mixnet)
 
 ### Dependencies  
 [PyTorch > v1.0.0](http://pytorch.org/)
