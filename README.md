@@ -5,8 +5,8 @@ This repo is the pytorch implementation of the paper from Google: [MixConv: Mixe
 This code mimics the implementation from the offical repo in Tensorflow (https://github.com/tensorflow/tpu/tree/master/models/official/mnasnet/mixnet)
 
 ### Dependencies  
-Python > 3.5  
-[PyTorch > v1.0.0](http://pytorch.org/)
+Python 3.5+  
+[PyTorch v1.0.0+](http://pytorch.org/)
 
 ### How to use
 `python train_cifar.py --lr 0.016 --batch-size 256 -a mixnet-s --dtype cifar100 --optim adam --scheduler exp --epochs 650`
