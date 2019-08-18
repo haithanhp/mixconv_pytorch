@@ -26,4 +26,4 @@ This code mimics the implementation from the offical repo in Tensorflow (https:/
 | Mixnet-L    | in progress  | 7.3M (*this code*)| Bug issue (solved soon)       |
 
 ### Discussion
-Currently, the accuracy is very low compare with the number reported in the paper. So, welcome scientific, rigorous ,and helpful feedbacks to train MixConv proper in Pytorch. 
+Currently, the accuracy is very low compare with the numbers reported in the paper. So, welcome scientific, rigorous ,and helpful feedbacks to train MixConv proper in Pytorch. 
