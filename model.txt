@@ -1,0 +1,573 @@
+Experiment dir : eval-EXP-cifar10-20190815-183831
+08/15 06:38:31 PM => load data 'cifar10'
+Files already downloaded and verified
+Files already downloaded and verified
+08/15 06:38:32 PM update lrs: '[150, 250, 350]'
+08/15 06:38:32 PM => creating model 'mixnet-s'
+MixNet(
+  (_relu): ReLU()
+  (_mix_blocks): Sequential(
+    (0): MixnetBlock(
+      (_act_fn): ReLU()
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(16, 16, kernel_size=(3, 3), stride=(1, 1), groups=16, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(16, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(16, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (1): MixnetBlock(
+      (_act_fn): ReLU()
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(8, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(8, 48, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(96, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(96, 96, kernel_size=(3, 3), stride=(2, 2), groups=96, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(96, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(48, 12, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(48, 12, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(24, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (2): MixnetBlock(
+      (_act_fn): ReLU()
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(12, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(12, 36, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(72, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(72, 72, kernel_size=(3, 3), stride=(1, 1), groups=72, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(72, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(36, 12, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(36, 12, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(24, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (3): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(24, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(144, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(48, 48, kernel_size=(3, 3), stride=(2, 2), groups=48, bias=False)
+          (1): Conv2dSamePadding(48, 48, kernel_size=(5, 5), stride=(2, 2), groups=48, bias=False)
+          (2): Conv2dSamePadding(48, 48, kernel_size=(7, 7), stride=(2, 2), groups=48, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(144, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(144, 12, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(12, 144, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(144, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(40, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (4): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(20, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(20, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(240, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(120, 120, kernel_size=(3, 3), stride=(1, 1), groups=120, bias=False)
+          (1): Conv2dSamePadding(120, 120, kernel_size=(5, 5), stride=(1, 1), groups=120, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(240, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(20, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(120, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(120, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(40, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (5): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(20, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(20, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(240, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(120, 120, kernel_size=(3, 3), stride=(1, 1), groups=120, bias=False)
+          (1): Conv2dSamePadding(120, 120, kernel_size=(5, 5), stride=(1, 1), groups=120, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(240, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(20, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(120, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(120, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(40, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (6): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(20, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(20, 120, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(240, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(120, 120, kernel_size=(3, 3), stride=(1, 1), groups=120, bias=False)
+          (1): Conv2dSamePadding(120, 120, kernel_size=(5, 5), stride=(1, 1), groups=120, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(240, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(20, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(120, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(120, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(40, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (7): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(40, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(240, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(80, 80, kernel_size=(3, 3), stride=(2, 2), groups=80, bias=False)
+          (1): Conv2dSamePadding(80, 80, kernel_size=(5, 5), stride=(2, 2), groups=80, bias=False)
+          (2): Conv2dSamePadding(80, 80, kernel_size=(7, 7), stride=(2, 2), groups=80, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(240, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 10, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(10, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(120, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(120, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(80, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (8): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(80, 480, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(480, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 240, kernel_size=(3, 3), stride=(1, 1), groups=240, bias=False)
+          (1): Conv2dSamePadding(240, 240, kernel_size=(5, 5), stride=(1, 1), groups=240, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(480, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(480, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(20, 480, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(240, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(80, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (9): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(80, 480, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(480, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 240, kernel_size=(3, 3), stride=(1, 1), groups=240, bias=False)
+          (1): Conv2dSamePadding(240, 240, kernel_size=(5, 5), stride=(1, 1), groups=240, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(480, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(480, 20, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(20, 480, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(240, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(80, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (10): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(40, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(40, 240, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(480, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(160, 160, kernel_size=(3, 3), stride=(1, 1), groups=160, bias=False)
+          (1): Conv2dSamePadding(160, 160, kernel_size=(5, 5), stride=(1, 1), groups=160, bias=False)
+          (2): Conv2dSamePadding(160, 160, kernel_size=(7, 7), stride=(1, 1), groups=160, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(480, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(480, 40, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(40, 480, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(240, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(240, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(120, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (11): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(60, 180, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(60, 180, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(360, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(90, 90, kernel_size=(3, 3), stride=(1, 1), groups=90, bias=False)
+          (1): Conv2dSamePadding(90, 90, kernel_size=(5, 5), stride=(1, 1), groups=90, bias=False)
+          (2): Conv2dSamePadding(90, 90, kernel_size=(7, 7), stride=(1, 1), groups=90, bias=False)
+          (3): Conv2dSamePadding(90, 90, kernel_size=(9, 9), stride=(1, 1), groups=90, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(360, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(360, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(60, 360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(180, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(180, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(120, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (12): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(60, 180, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(60, 180, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(360, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(90, 90, kernel_size=(3, 3), stride=(1, 1), groups=90, bias=False)
+          (1): Conv2dSamePadding(90, 90, kernel_size=(5, 5), stride=(1, 1), groups=90, bias=False)
+          (2): Conv2dSamePadding(90, 90, kernel_size=(7, 7), stride=(1, 1), groups=90, bias=False)
+          (3): Conv2dSamePadding(90, 90, kernel_size=(9, 9), stride=(1, 1), groups=90, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(360, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(360, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(60, 360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(180, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(180, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(120, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (13): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(120, 720, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(720, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(144, 144, kernel_size=(3, 3), stride=(2, 2), groups=144, bias=False)
+          (1): Conv2dSamePadding(144, 144, kernel_size=(5, 5), stride=(2, 2), groups=144, bias=False)
+          (2): Conv2dSamePadding(144, 144, kernel_size=(7, 7), stride=(2, 2), groups=144, bias=False)
+          (3): Conv2dSamePadding(144, 144, kernel_size=(9, 9), stride=(2, 2), groups=144, bias=False)
+          (4): Conv2dSamePadding(144, 144, kernel_size=(11, 11), stride=(2, 2), groups=144, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(720, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(720, 60, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(60, 720, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(720, 200, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(200, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (14): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(200, 1200, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(1200, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(300, 300, kernel_size=(3, 3), stride=(1, 1), groups=300, bias=False)
+          (1): Conv2dSamePadding(300, 300, kernel_size=(5, 5), stride=(1, 1), groups=300, bias=False)
+          (2): Conv2dSamePadding(300, 300, kernel_size=(7, 7), stride=(1, 1), groups=300, bias=False)
+          (3): Conv2dSamePadding(300, 300, kernel_size=(9, 9), stride=(1, 1), groups=300, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(1200, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(1200, 100, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(100, 1200, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(600, 100, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(600, 100, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(200, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+    (15): MixnetBlock(
+      (_act_fn): Swish(
+        (sig): Sigmoid()
+      )
+      (_expand_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(200, 1200, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn0): BatchNorm2d(1200, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_depthwise_conv): MDConv(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(300, 300, kernel_size=(3, 3), stride=(1, 1), groups=300, bias=False)
+          (1): Conv2dSamePadding(300, 300, kernel_size=(5, 5), stride=(1, 1), groups=300, bias=False)
+          (2): Conv2dSamePadding(300, 300, kernel_size=(7, 7), stride=(1, 1), groups=300, bias=False)
+          (3): Conv2dSamePadding(300, 300, kernel_size=(9, 9), stride=(1, 1), groups=300, bias=False)
+        )
+      )
+      (_bn1): BatchNorm2d(1200, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+      (_se_reduce): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(1200, 100, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_se_expand): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(100, 1200, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (sigmoid): Sigmoid()
+      (_project_conv): GroupedConv2D(
+        (_convs): ModuleList(
+          (0): Conv2dSamePadding(600, 100, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): Conv2dSamePadding(600, 100, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (_bn2): BatchNorm2d(200, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+    )
+  )
+  (_conv_stem): GroupedConv2D(
+    (_convs): ModuleList(
+      (0): Conv2dSamePadding(3, 16, kernel_size=(3, 3), stride=(2, 2), bias=False)
+    )
+  )
+  (_bn0): BatchNorm2d(16, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+  (_conv_head): GroupedConv2D(
+    (_convs): ModuleList(
+      (0): Conv2dSamePadding(200, 1536, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    )
+  )
+  (_bn1): BatchNorm2d(1536, eps=0.001, momentum=0.99, affine=True, track_running_stats=True)
+  (avgpool): AvgPool2d(kernel_size=1, stride=1, padding=0)
+  (classifier): Linear(in_features=1536, out_features=10, bias=True)
+  (dropout): Dropout(p=0.2)
+)
