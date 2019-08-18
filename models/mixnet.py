@@ -199,9 +199,9 @@ class MixnetBlock(nn.Module):
         x1 = self._depthwise_conv(x)
         self._num_flops += self._depthwise_conv._num_flops
         x2 = self._bn1(x1)
-        t = x1[0]
-        nelements = t.numel()
-        self._num_flops += 4*nelements
+        # t = x1[0]
+        # nelements = t.numel()
+        # self._num_flops += 4*nelements
 
         x = self._act_fn(x2)
         # t = x2[0]
