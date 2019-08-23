@@ -24,7 +24,7 @@ Python 3.5+
 | ----------- | ------------ | ------------------|------------|
 | Mixnet-S    | in progress  | 4.1M (*this code*)| 259M (*this code*)       |
 | Mixnet-M    | in progress  | 5.0M (*this code*)| 360M (*this code*)       |
-| Mixnet-L    | in progress  | 7.3M (*this code*)| Bug issue (solved soon)       |
+| Mixnet-L    | in progress  | 7.3M (*this code*)| 580M (*this code*)       |
 
 ### Discussion
 Currently, the accuracy is very low compare with the numbers reported in the paper. So, welcome scientific, rigorous ,and helpful feedbacks to train MixConv proper in Pytorch. 
